@@ -81,7 +81,8 @@ public class MainActivity extends AppCompatActivity {
     private void uploadFileByOkHTTP(Activity context, String uploadUrl, File file) {
 
 //        MediaType mediaType = MediaType.parse("application/octet-stream");// add
-        MediaType mediaType = MediaType.parse("image/jpg"); // 区别
+//        MediaType mediaType = MediaType.parse("image/jpg"); // 区别
+        MediaType mediaType = MediaType.parse("image/jpeg; charset=utf-8");
 //        MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded; charset=utf-8");
 
         uploadFile(uploadUrl, file, mediaType, new Callback() {
@@ -130,14 +131,14 @@ public class MainActivity extends AppCompatActivity {
      */
     public static Bitmap getSmallBitmap(String filePath) {
         final BitmapFactory.Options options = new BitmapFactory.Options();
-//        options.inJustDecodeBounds = true;//只解析图片边沿，获取宽高
-//        BitmapFactory.decodeFile(filePath, options);
-//
-//        // 计算缩放比
-//        options.inSampleSize = calculateInSampleSize(options, 480, 800);
-//
-//        // 完整解析图片返回bitmap
-//        options.inJustDecodeBounds = false;
+        options.inJustDecodeBounds = true;//只解析图片边沿，获取宽高
+        BitmapFactory.decodeFile(filePath, options);
+
+        // 计算缩放比
+        options.inSampleSize = calculateInSampleSize(options, 480, 800);
+
+        // 完整解析图片返回bitmap
+        options.inJustDecodeBounds = false;
         return BitmapFactory.decodeFile(filePath, options);
     }
 
